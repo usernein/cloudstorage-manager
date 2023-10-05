@@ -1,5 +1,5 @@
 .App {
-  @apply flex h-full w-full flex-col flex-wrap items-center justify-start p-2 gap-2;
+  @apply flex h-full w-full flex-col flex-wrap items-center justify-start;
 
   .heading {
     @apply font-bold text-lg text-hint pt-5;

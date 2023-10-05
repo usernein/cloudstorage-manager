@@ -1,5 +1,5 @@
 .StoredSingleItem {
-  @apply flex h-12 w-full flex-row items-center rounded-lg p-5 bg-secondaryBg justify-between rounded-lg;
+  @apply flex h-12 w-full flex-row items-center p-5 bg-background justify-between rounded-lg;
 
   .title {
     @apply font-semibold text-text;

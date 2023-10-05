@@ -1,0 +1,11 @@
+.ItemsFilterInput {
+  @apply w-full;
+
+  .filterInput {
+    @apply input input-ghost-primary input-block w-full input-md text-text;
+
+    &:focus, &:hover {
+      @apply border-button;
+    }
+  }
+}

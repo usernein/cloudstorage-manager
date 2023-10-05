@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./App.module.scss";
 import clsx from "clsx";
 import { CloudStorageItems } from "../CloudStorageItems/CloudStorageItems.tsx";
-import { StoredItemsActions } from "../StoredItemsActions/StoredItemsActions.tsx";
+import { StoredItemsActionsToolBar } from "../StoredItemsActionsToolBar/StoredItemsActionsToolBar.tsx";
 
 export type AppProps = {
   className?: string;
@@ -10,7 +10,7 @@ export type AppProps = {
 export const App: React.FC<AppProps> = ({ className }) => {
   return (
     <div className={clsx(styles.App, className)}>
-      <StoredItemsActions />
+      <StoredItemsActionsToolBar />
       <CloudStorageItems />
     </div>
   );

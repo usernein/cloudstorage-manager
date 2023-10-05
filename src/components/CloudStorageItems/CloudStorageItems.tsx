@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 import styles from "./CloudStorageItems.module.scss";
 import clsx from "clsx";
 import { useWebApp } from "@vkruglikov/react-telegram-web-app";
@@ -7,6 +7,8 @@ import { StoredSingleItem } from "../StoredSingleItem/StoredSingleItem.tsx";
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner.tsx";
 import { EmptyStorageAlert } from "../EmptyStorageAlert/EmptyStorageAlert.tsx";
 import FadeIn from "react-fade-in";
+import { useContextSelector } from "use-context-selector";
+import { StateDataContext } from "../../context/StateDataContext.ts";
 
 export type CloudStorageItemsProps = {
   className?: string;
@@ -30,14 +32,47 @@ const useGetStorageKeys = (WebApp: ReturnType<typeof useWebApp>) => {
   };
 };
 
+const FilteredItems = ({ items }: { items: string[] }) => {
+  const filterQuery = useContextSelector(
+    StateDataContext,
+    (state) => state.state.filterQuery,
+  );
+
+  const filtered = items.filter((item) =>
+    item.toLowerCase().includes(filterQuery.toLowerCase()),
+  );
+
+  return (
+    <FadeIn className={styles.CloudStorageItemsList}>
+      {filtered.map((key: string) => (
+        <StoredSingleItem key={key} name={key} />
+      ))}
+    </FadeIn>
+  );
+};
+
 export const CloudStorageItems: React.FC<CloudStorageItemsProps> = ({
   className,
 }) => {
   const WebApp = useWebApp();
-  const { status, data, error } = useQuery({
+  const { status, data, error, refetch } = useQuery({
     queryFn: useGetStorageKeys(WebApp),
     queryKey: [],
+    enabled: false,
   });
+
+  useEffect(() => {
+    const onNewItem = () => {
+      refetch().catch(console.error);
+    };
+
+    refetch().catch(console.error);
+    window.addEventListener("storage-new-item", onNewItem);
+
+    return () => {
+      window.removeEventListener("storage-new-item", onNewItem);
+    };
+  }, [refetch]);
 
   let contentToRender: ReactNode;
 
@@ -57,17 +92,15 @@ export const CloudStorageItems: React.FC<CloudStorageItemsProps> = ({
         contentToRender = <EmptyStorageAlert />;
         break;
       }
-      contentToRender = data.map((key: string) => (
-        <StoredSingleItem key={key} name={key} />
-      ));
+      contentToRender = <FilteredItems items={data} />;
       break;
     default:
       contentToRender = <div>Unknown error!</div>;
   }
 
   return (
-    <FadeIn className={clsx(styles.CloudStorageItems, className)}>
+    <div className={clsx(styles.CloudStorageItems, className)}>
       {contentToRender}
-    </FadeIn>
+    </div>
   );
 };
