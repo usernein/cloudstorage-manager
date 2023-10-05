@@ -60,7 +60,7 @@ export const InputNewItemModal: React.FC<InputNewItemModalProps> = ({
             <input
               type="text"
               className={styles.textInput}
-              defaultValue={key}
+              value={key}
               onChange={(e) => {
                 setKey(e.target.value);
               }}
@@ -71,7 +71,7 @@ export const InputNewItemModal: React.FC<InputNewItemModalProps> = ({
             <span className={styles.inputLabelText}>Value</span>
             <textarea
               className={styles.textAreaInput}
-              defaultValue={value}
+              value={value}
               onChange={(e) => setValue(e.target.value)}
             />
           </label>
