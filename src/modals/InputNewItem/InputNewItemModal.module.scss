@@ -39,7 +39,7 @@
 
     .cancelButton {
       @include button;
-      @apply text-hint hover:text-whiteInverted btn-ghost;
+      @apply text-hint hover:text-whiteInverted bg-transparent hover:bg-gray-300;
     }
   }
 }
