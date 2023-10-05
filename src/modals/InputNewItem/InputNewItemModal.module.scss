@@ -1,0 +1,45 @@
+.InputNewItemModal {
+  @apply flex h-full w-full flex-col items-center justify-center;
+
+  .title {
+    @apply text-2xl font-bold;
+  }
+
+  .body {
+    @apply flex flex-col gap-2;
+
+    .inputLabel {
+      @apply text-text w-full flex flex-col;
+
+      .inputLabelText {
+        @apply text-sm font-bold;
+      }
+
+      .textInput {
+        @apply input input-ghost-primary hover:border-button focus:border-button text-text;
+      }
+
+      .textAreaInput {
+        @apply textarea textarea-ghost-primary hover:border-button focus:border-button text-text;
+      }
+    }
+  }
+
+  .actionsBar {
+    @apply flex gap-2 justify-between w-full;
+
+    @mixin button {
+      @apply btn btn-sm btn-block;
+    }
+
+    .createButton {
+      @include button;
+      @apply bg-button text-buttonText;
+    }
+
+    .cancelButton {
+      @include button;
+      @apply text-hint hover:text-whiteInverted btn-ghost;
+    }
+  }
+}
