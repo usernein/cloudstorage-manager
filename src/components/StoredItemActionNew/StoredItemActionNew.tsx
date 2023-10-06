@@ -1,7 +1,11 @@
-import React from "react";
+import React, { Suspense } from "react";
 import styles from "./StoredItemActionNew.module.scss";
 import clsx from "clsx";
-import { InputNewItemModal } from "../../modals/InputNewItem/InputNewItemModal.tsx";
+import { lazily } from "react-lazily";
+
+const { InputNewItemModal } = lazily(
+  () => import("../../modals/InputNewItem/InputNewItemModal.tsx"),
+);
 
 export type StoredItemActionNewProps = {
   className?: string;
@@ -14,7 +18,9 @@ export const StoredItemActionNew: React.FC<StoredItemActionNewProps> = ({
       <label className={styles.button} htmlFor="input-new-item">
         New
       </label>
-      <InputNewItemModal checkboxId="input-new-item" />
+      <Suspense>
+        <InputNewItemModal checkboxId="input-new-item" />
+      </Suspense>
     </div>
   );
 };
