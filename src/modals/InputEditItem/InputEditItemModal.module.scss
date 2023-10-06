@@ -28,7 +28,7 @@
       @apply flex w-full flex-col text-text gap-1;
 
       &.disabled {
-        @apply opacity-30;
+        @apply opacity-30 pointer-events-none;
       }
 
       .inputLabelHeader {
