@@ -1,5 +1,5 @@
 .CloudStorageItems {
-  @apply flex flex-col w-full;
+  @apply flex flex-col w-full overflow-hidden;
 
   .CloudStorageItemsList {
     @apply flex gap-1 flex-col p-1;
