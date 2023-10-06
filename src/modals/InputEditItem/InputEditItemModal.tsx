@@ -77,7 +77,7 @@ export const InputEditItemModal: React.FC<InputEditItemModalProps> = ({
             className={clsx(styles.deleteIcon, isDeleting && styles.active)}
             onClick={() => setIsDeleting(!isDeleting)}
           >
-            <Trash size={16} weight="light" />
+            <Trash size={20} weight="light" />
           </button>
         </div>
         <div className={styles.body}>

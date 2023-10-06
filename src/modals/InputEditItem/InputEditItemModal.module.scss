@@ -25,7 +25,7 @@
     @apply flex flex-col gap-2;
 
     .inputLabel {
-      @apply flex w-full flex-col text-text;
+      @apply flex w-full flex-col text-text gap-1;
 
       &.disabled {
         @apply opacity-30;
