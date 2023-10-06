@@ -16,6 +16,10 @@
       }
 
       .textInput {
+        &:invalid {
+          @apply input-error text-error;
+        }
+
         @apply input input-ghost-primary hover:border-button focus:border-button text-text;
       }
 

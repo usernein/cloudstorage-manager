@@ -1,84 +1,38 @@
-import React, { ReactNode, useEffect } from "react";
+import React, { ReactNode } from "react";
 import styles from "./CloudStorageItems.module.scss";
 import clsx from "clsx";
 import { useWebApp } from "@vkruglikov/react-telegram-web-app";
 import { useQuery } from "@tanstack/react-query";
-import { StoredSingleItem } from "../StoredSingleItem/StoredSingleItem.tsx";
-import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner.tsx";
+import { LoadingSpinnerDots } from "../../ui-components/LoadingSpinnerDots/LoadingSpinnerDots.tsx";
 import { EmptyStorageAlert } from "../EmptyStorageAlert/EmptyStorageAlert.tsx";
-import FadeIn from "react-fade-in";
-import { useContextSelector } from "use-context-selector";
-import { StateDataContext } from "../../context/StateDataContext.ts";
+import { FilteredListWithFadeIn } from "../FilteredListWithFadeIn/FilteredListWithFadeIn.tsx";
+import { useAsyncStorageGetKeys } from "../../hooks/useAsyncStorageGetKeys.ts";
+import { useStorageRefreshAllItemsListener } from "../../events";
 
 export type CloudStorageItemsProps = {
   className?: string;
-};
-
-const useGetStorageKeys = (WebApp: ReturnType<typeof useWebApp>) => {
-  return () => {
-    return new Promise<string[]>((resolve) => {
-      try {
-        WebApp.CloudStorage.getKeys((err: Error | null, keys: string[]) => {
-          if (err) {
-            return resolve(["abc", "def", "ghi"]);
-            // return reject(err);
-          }
-          resolve(keys);
-        });
-      } catch {
-        resolve(["abc", "def", "ghi"]);
-      }
-    });
-  };
-};
-
-const FilteredItems = ({ items }: { items: string[] }) => {
-  const filterQuery = useContextSelector(
-    StateDataContext,
-    (state) => state.state.filterQuery,
-  );
-
-  const filtered = items.filter((item) =>
-    item.toLowerCase().includes(filterQuery.toLowerCase()),
-  );
-
-  return (
-    <FadeIn className={styles.CloudStorageItemsList}>
-      {filtered.map((key: string) => (
-        <StoredSingleItem key={key} name={key} />
-      ))}
-    </FadeIn>
-  );
 };
 
 export const CloudStorageItems: React.FC<CloudStorageItemsProps> = ({
   className,
 }) => {
   const WebApp = useWebApp();
+  const getStorageKeys = useAsyncStorageGetKeys(WebApp);
   const { status, data, error, refetch } = useQuery({
-    queryFn: useGetStorageKeys(WebApp),
-    queryKey: [],
-    enabled: false,
+    queryFn: getStorageKeys,
+    queryKey: ["get-all-keys"],
+    enabled: true,
   });
 
-  useEffect(() => {
-    const onNewItem = () => {
-      refetch().catch(console.error);
-    };
-
+  useStorageRefreshAllItemsListener(() => {
     refetch().catch(console.error);
-    window.addEventListener("storage-new-item", onNewItem);
-
-    return () => {
-      window.removeEventListener("storage-new-item", onNewItem);
-    };
-  }, [refetch]);
+  });
 
   let contentToRender: ReactNode;
 
   switch (status) {
     case "loading":
-      contentToRender = <LoadingSpinner />;
+      contentToRender = <LoadingSpinnerDots className={"p-10"} />;
       break;
 
     case "error":
@@ -88,11 +42,16 @@ export const CloudStorageItems: React.FC<CloudStorageItemsProps> = ({
       break;
 
     case "success":
-      if (data?.length === 0) {
+      if (!Array.isArray(data) || !data?.length) {
         contentToRender = <EmptyStorageAlert />;
         break;
       }
-      contentToRender = <FilteredItems items={data} />;
+      contentToRender = (
+        <FilteredListWithFadeIn
+          className={styles.CloudStorageItemsList}
+          items={data}
+        />
+      );
       break;
     default:
       contentToRender = <div>Unknown error!</div>;

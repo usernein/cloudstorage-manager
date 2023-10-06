@@ -1,15 +1,20 @@
 .StoredSingleItem {
-  @apply flex h-12 w-full flex-row items-center p-5 bg-background justify-between rounded-lg;
+  @apply flex h-12 w-full flex-row items-center justify-between rounded-lg p-5 bg-background;
 
   .title {
-    @apply font-semibold text-text;
+    @apply w-44 overflow-hidden overflow-ellipsis whitespace-nowrap;
+
+    .titleText {
+      @apply font-semibold text-text;
+    }
   }
 
   .value {
-    @apply w-12 overflow-ellipsis text-hint text-sm;
+    @apply w-44 overflow-hidden whitespace-nowrap;
+    @apply overflow-ellipsis text-sm text-hint;
   }
 
   .icon {
-    @apply w-6 h-6;
+    @apply h-6 w-6;
   }
 }

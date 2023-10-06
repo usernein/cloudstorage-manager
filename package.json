@@ -15,18 +15,24 @@
     "create-modal": "npx generate-react-cli component --type=modal"
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.0.13",
     "@tanstack/react-query": "^4.35.7",
     "@types/lodash": "^4.14.199",
     "@types/node": "^20.8.2",
+    "@types/react-copy-to-clipboard": "^5.0.5",
     "@vkruglikov/react-telegram-web-app": "^2.1.4",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",
+    "react-event-hook": "^3.1.2",
     "react-fade-in": "^2.0.1",
+    "react-useanimations": "^2.10.0",
     "rippleui": "^1.12.1",
     "scheduler": "^0.23.0",
     "ts-deepmerge": "^6.2.0",
-    "use-context-selector": "^1.4.1"
+    "use-context-selector": "^1.4.1",
+    "use-ripple-hook": "^1.0.22"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^4.36.0",

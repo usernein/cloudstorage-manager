@@ -1,0 +1,92 @@
+.InputEditItemModal {
+  @apply flex h-full w-full flex-col items-center justify-center;
+
+  .header {
+    @apply w-full flex flex-row justify-between items-center;
+
+    .title {
+      @apply text-xl font-bold w-52 overflow-auto;
+
+      .itemKey {
+        @apply text-link;
+      }
+    }
+
+    .deleteIcon {
+      @apply btn btn-xs w-8 h-8 btn-circle bg-transparent hover:bg-error hover:text-white text-text;
+
+      &.active {
+        @apply bg-error text-white;
+      }
+    }
+  }
+
+  .body {
+    @apply flex flex-col gap-2;
+
+    .inputLabel {
+      @apply flex w-full flex-col text-text;
+
+      &.disabled {
+        @apply opacity-30;
+      }
+
+      .inputLabelHeader {
+        @apply w-full flex flex-row justify-between items-center;
+
+        .copyIcon {
+          @apply active:scale-95 cursor-pointer duration-150 hover:text-button text-text;
+
+          &.active {
+            @apply bg-button text-white;
+          }
+        }
+
+        .copiedIcon {
+          @apply text-button pointer-events-none;
+        }
+      }
+
+      .inputLabelText {
+        @apply text-sm font-bold;
+      }
+
+      .textInput {
+        @apply input input-ghost-primary text-text hover:border-button focus:border-button;
+      }
+
+      .textAreaInput {
+        &:disabled {
+          &:hover, &:focus {
+            @apply border-gray-6;
+          }
+        }
+
+        @apply h-32 textarea textarea-ghost-primary text-text hover:border-button focus:border-button;
+      }
+    }
+  }
+
+  .actionsBar {
+    @apply flex w-full justify-between gap-2;
+
+    @mixin button {
+      @apply btn btn-sm btn-block;
+    }
+
+    .createButton {
+      @include button;
+      @apply bg-button text-buttonText;
+    }
+
+    .deleteButton {
+      @include button;
+      @apply bg-error text-white;
+    }
+
+    .cancelButton {
+      @include button;
+      @apply bg-transparent text-hint hover:text-whiteInverted hover:bg-gray-300;
+    }
+  }
+}

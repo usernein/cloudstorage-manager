@@ -18,5 +18,5 @@
 }
 
 #root {
-  @apply flex h-screen w-screen items-center justify-center bg-secondaryBg text-text;
+  @apply flex h-viewportStable w-screen items-center justify-center bg-secondaryBg text-text;
 }
