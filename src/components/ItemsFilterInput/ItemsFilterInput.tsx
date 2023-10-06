@@ -19,7 +19,7 @@ export const ItemsFilterInput: React.FC<ItemsFilterInputProps> = ({
       <input
         type="text"
         className={styles.filterInput}
-        placeholder="Filter by key..."
+        placeholder="Filter CloudStorage items by key..."
         onChange={(e) => {
           updateState({ filterQuery: e.target.value });
         }}

@@ -10,7 +10,7 @@ export const EmptyStorageAlert: React.FC<EmptyStorageAlertProps> = ({
 }) => {
   return (
     <div className={clsx(styles.EmptyStorageAlert, className)}>
-      No items in storage yet.
+      No items in CloudStorage yet.
     </div>
   );
 };
