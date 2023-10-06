@@ -24,7 +24,7 @@ export const BaseModal: React.FC<BaseModalProps> = ({
         checked={isOpen}
         onChange={(e) => (onChange ? onChange(e.target.checked) : null)}
       />
-      <div className="modal">
+      <div className="modal h-viewportStable">
         <label className="modal-overlay"></label>
         <div className="modal-content flex flex-col gap-5 bg-background text-text">
           {showCloseButton && (
