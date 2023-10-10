@@ -8,6 +8,7 @@ import { EmptyStorageAlert } from "../EmptyStorageAlert/EmptyStorageAlert.tsx";
 import { FilteredListWithFadeIn } from "../FilteredListWithFadeIn/FilteredListWithFadeIn.tsx";
 import { useAsyncStorageGetKeys } from "../../hooks/useAsyncStorageGetKeys.ts";
 import { useStorageRefreshAllItemsListener } from "../../events";
+import { StoredItemsActionsToolBar } from "../StoredItemsActionsToolBar/StoredItemsActionsToolBar.tsx";
 
 export type CloudStorageItemsProps = {
   className?: string;
@@ -47,10 +48,13 @@ export const CloudStorageItems: React.FC<CloudStorageItemsProps> = ({
         break;
       }
       contentToRender = (
-        <FilteredListWithFadeIn
-          className={styles.CloudStorageItemsList}
-          items={data}
-        />
+        <>
+          <StoredItemsActionsToolBar />
+          <FilteredListWithFadeIn
+            className={styles.CloudStorageItemsList}
+            items={data}
+          />
+        </>
       );
       break;
     default:

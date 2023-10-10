@@ -1,8 +1,7 @@
-# react-mini-app
+# cloudstorage-manager
 
-react-mini-app is a simple Telegram Mini App built with ReactJS + TypeScript + Vite and uses the RippleUI library +
-TailwindCSS for UI components.
-It's intended to be used as a template for creating new Telegram Mini Apps using ReactJS and TailwindCSS.
+Created with ReactJS, TailwindCSS, RippleUI and Telegram WebApp API, this project aims to provide a simple and intuitive
+way to read and set data into the new Telegram CloudStorage.
 
 ## Setup
 
@@ -21,6 +20,17 @@ npm install
 npm run dev
 
 ```
+
+#### Pushing to production
+
+In order to push to production, you need first to build the entire project:
+
+```bash
+npm run build
+
+```
+
+Then, you can simply upload the contents of the folder `dist` to your web server.
 
 ## Features
 
